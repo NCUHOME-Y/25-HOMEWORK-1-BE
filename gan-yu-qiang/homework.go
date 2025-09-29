@@ -49,8 +49,7 @@ func (c1 Complex) Multiply(c2 Complex) Complex {
 func (c1 Complex) Divide(c2 Complex) (Complex, error) {
 	mother := c2.Real*c2.Real + c2.Imag*c2.Imag
 	if mother == 0 {
-		var errString string = "错误：分母为零"
-		return Complex{}, errors.New(errString)
+		return Complex{}, errors.New("错误：分母为零")
 	} else {
 		realSon := c1.Real*c2.Real + c1.Imag*c2.Imag
 		imagSon := c1.Imag*c2.Real - c1.Real*c2.Imag
@@ -90,12 +89,14 @@ func getUserComplexInput(name string) Complex {
 	_, err := fmt.Scanf("%f\n", &realPart)
 	if err != nil {
 		fmt.Println("输入错误，使用默认值 0.0")
+		realPart = 0.0
 	}
 
 	fmt.Printf("请输入复数 %s 的虚部 (Imag): ", name)
 	_, err = fmt.Scanf("%f\n", &imagPart)
 	if err != nil {
 		fmt.Println("输入错误，使用默认值 0.0")
+		imagPart = 0.0
 	}
 
 	return NewComplex(realPart, imagPart)
