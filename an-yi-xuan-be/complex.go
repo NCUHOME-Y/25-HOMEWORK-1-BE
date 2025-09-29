@@ -36,13 +36,15 @@ func (c Complex) Div(d Complex) Complex { //除法
 }
 
 func (c Complex) String() string {
-	// 根据虚部的正负来决定使用 + 还是 -     且为0实部只输出0
-	if c.xu == 0 {
+	const epsilon = 1e-9 // 浮点比较的容差
+	switch {
+	case math.Abs(c.xu) < epsilon:
 		return fmt.Sprintf("%.2f", c.shi)
-	} else if c.xu > 0 {
-		return fmt.Sprintf("%.2f + %.2fi", c.shi, c.xu)
+	case math.Abs(c.shi) < epsilon:
+		return fmt.Sprintf("%.2fi", c.xu)
+	default:
+		return fmt.Sprintf("%.2f%+.2fi", c.shi, c.xu)
 	}
-	return fmt.Sprintf("%.2f - %.2fi", c.shi, -c.xu)
 }
 
 func main() {
@@ -62,20 +64,17 @@ func main() {
 	}
 	c1 := NewComplex(s1, x1)
 	c2 := NewComplex(s2, x2)
-	fmt.Println("\n--------------------")
 	fmt.Printf("你输入的两个复数是: \n c1 = %s \n c2 = %s \n", c1, c2)
-	fmt.Println("--------------------")
 
-	// --- 执行并打印计算结果 ---
 	fmt.Printf("(%s) + (%s) = %s\n", c1, c2, c1.Add(c2))
 	fmt.Printf("(%s) - (%s) = %s\n", c1, c2, c1.Sub(c2))
 	fmt.Printf("(%s) * (%s) = %s\n", c1, c2, c1.Mul(c2))
 
-	// 检查除数是否为0
-	if c2.shi == 0 && c2.xu == 0 {
-		fmt.Println("除数 c2 是零，无法执行除法。") //float64不可以直接判断
-	} else {
-		fmt.Printf("(%s) / (%s) = %s\n", c1, c2, c1.Div(c2))
+	const epsilon = 1e-9
+
+	if c2.Abs() < epsilon { //float64精度可能误判
+		fmt.Println("除数 c2 太接近于零，无法执行除法。")
+		return
 	}
 
 	fmt.Printf("|%s| 的模长是: %.2f\n", c1, c1.Abs())
