@@ -24,8 +24,8 @@ func (count1 Complex) Subtract(count2 Complex) Complex {
 }
 
 func (count1 Complex) Multiply(count2 Complex) Complex {
-	realPart := c1.Real*c2.Real - c1.Imag*c2.Imag
-	imagPart := c1.Real*c2.Imag + c1.Imag*c2.Real
+	realPart := count1.Real*count2.Real - count1.Imag*count2.Imag
+	imagPart := count1.Real*count2.Imag + count1.Imag*count2.Real
 	return Complex{
 		Real: realPart,
 		Imag: imagPart,
