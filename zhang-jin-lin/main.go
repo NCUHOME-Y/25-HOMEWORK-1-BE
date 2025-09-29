@@ -9,25 +9,25 @@ type Complex struct {
 	imaginary float64
 }
 
-func Add(first, second Complex) Complex {
+func (first Complex) Add(second Complex) Complex {
 	return Complex{
 		real:      first.real + second.real,
 		imaginary: first.imaginary + second.imaginary,
 	}
 }
-func Sub(first, second Complex) Complex {
+func (first Complex) Sub(second Complex) Complex {
 	return Complex{
 		real:      first.real - second.real,
 		imaginary: first.imaginary - second.imaginary,
 	}
 }
-func Mul(first, second Complex) Complex {
+func (first Complex) Mul(second Complex) Complex {
 	return Complex{
 		real:      first.real * second.real,
 		imaginary: first.imaginary * second.imaginary,
 	}
 }
-func Div(first, second Complex) Complex {
+func (first Complex) Div(second Complex) Complex {
 	return Complex{
 		real:      first.real / second.real,
 		imaginary: first.imaginary / second.imaginary,
@@ -72,7 +72,7 @@ func main() {
 	var first = Complex{real: real1, imaginary: imaginary1}
 	var second = Complex{real: real2, imaginary: imaginary2}
 
-	c1 := Add(first, second)
+	c1 := first.Add(second)
 	if c1.imaginary == 0 {
 		fmt.Printf("相加为：%.2f\n", c1.real)
 	}
@@ -83,7 +83,7 @@ func main() {
 		fmt.Printf("相加为：%.2f-%.2fi\n", c1.real, -c1.imaginary)
 	}
 
-	c2 := Mul(first, second)
+	c2 := first.Mul(second)
 	if c2.imaginary == 0 {
 		fmt.Printf("相乘为:%.2f\n", c2.real)
 	}
@@ -94,7 +94,7 @@ func main() {
 		fmt.Printf("相乘为:%.2f-%.2fi\n", c2.real, -c2.imaginary)
 	}
 
-	c3 := Div(first, second)
+	c3 := first.Div(second)
 	if c3.imaginary == 0 {
 		fmt.Printf("相除为:%.2f\n", c3.real)
 	}
