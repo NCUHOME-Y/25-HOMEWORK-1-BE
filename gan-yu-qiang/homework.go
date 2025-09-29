@@ -89,12 +89,14 @@ func getUserComplexInput(name string) Complex {
 	_, err := fmt.Scanf("%f\n", &realPart)
 	if err != nil {
 		fmt.Println("输入错误，使用默认值 0.0")
+		realPart = 0.0
 	}
 
 	fmt.Printf("请输入复数 %s 的虚部 (Imag): ", name)
 	_, err = fmt.Scanf("%f\n", &imagPart)
 	if err != nil {
 		fmt.Println("输入错误，使用默认值 0.0")
+		imagPart = 0.0
 	}
 
 	return NewComplex(realPart, imagPart)
