@@ -10,49 +10,49 @@ type Complex struct {
 	imag float64
 }
 
-func Write(real, imag float64) *Complex {
-	return &Complex{
+func Write(real, imag float64) Complex {
+	return Complex{
 		real: real, imag: imag,
 	}
 }
 
-func (c *Complex) Sum(other *Complex) *Complex {
-	return &Complex{
+func (c Complex) Sum(other Complex) Complex {
+	return Complex{
 		real: c.real + other.real,
 		imag: c.imag + other.imag,
 	}
 }
 
-func (c *Complex) Sub(other *Complex) *Complex {
-	return &Complex{
+func (c Complex) Sub(other Complex) Complex {
+	return Complex{
 		real: c.real - other.real,
 		imag: c.imag - other.imag,
 	}
 }
 
-func (c *Complex) Mul(other *Complex) *Complex {
-	return &Complex{
+func (c Complex) Mul(other Complex) Complex {
+	return Complex{
 		real: c.real*other.real - c.imag*other.imag,
 		imag: c.real*other.imag + c.imag*other.real,
 	}
 }
 
-func (c *Complex) Div(other *Complex) *Complex {
+func (c Complex) Div(other Complex) Complex {
 	denominator := other.real*other.real + other.imag*other.imag
 	if denominator == 0 {
-		return nil
+		return Complex{real: 0, imag: 0}
 	}
-	return &Complex{
+	return Complex{
 		real: (c.real*other.real + c.imag*other.imag) / denominator,
 		imag: (c.imag*other.real - c.real*other.imag) / denominator,
 	}
 }
 
-func (c *Complex) Mod() float64 {
+func (c Complex) Mod() float64 {
 	return math.Sqrt(c.real*c.real + c.imag*c.imag)
 }
 
-func (c *Complex) String() string {
+func (c Complex) String() string {
 	if c.imag >= 0 {
 		return fmt.Sprintf("%.2f + %.2fi", c.real, c.imag)
 	} else {
