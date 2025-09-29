@@ -38,7 +38,15 @@ func (c Complex) Mul(other Complex) Complex {
 }
 
 // 除法
+var ok = 0
+
 func (c Complex) Div(other Complex) Complex {
+
+	judge := other.real*other.real + other.imag*other.imag
+	if judge == 0 {
+		fmt.Println("除数不能为0")
+		ok = 1
+	}
 	return Complex{
 		real: (c.real*other.real + c.imag*other.imag) / (other.real*other.real + other.imag*other.imag),
 		imag: (c.imag*other.real - c.real*other.imag) / (other.real*other.real + other.imag*other.imag),
@@ -98,12 +106,13 @@ func main() {
 	}
 
 	c6 := c1.Div(c2) //除法
-	if c6.imag >= 0 {
-		fmt.Printf("这是除法 c1 / c2 = %.2f + %.2fi\n", c6.real, c6.imag)
-	} else {
-		fmt.Printf("这是除法 c1 / c2 = %.2f - %.2fi\n", c6.real, -c6.imag)
+	if ok == 0 {
+		if c6.imag >= 0 {
+			fmt.Printf("这是除法 c1 / c2 = %.2f + %.2fi\n", c6.real, c6.imag)
+		} else {
+			fmt.Printf("这是除法 c1 / c2 = %.2f - %.2fi\n", c6.real, -c6.imag)
+		}
 	}
-
 	c7 := c1.Len() //模长
 	fmt.Printf("这是模长 |c1| = %.2f\n", c7)
 
