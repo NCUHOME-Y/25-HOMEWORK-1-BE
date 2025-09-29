@@ -71,8 +71,6 @@ func main() {
 	fmt.Printf("(%s) * (%s) = %s\n", c1, c2, c1.Mul(c2))
 
 	const epsilon = 1e-9
-
-	const epsilon = 1e-9
 	if c2.Abs() < epsilon {
 		fmt.Println("除数 c2 太接近于零，无法执行除法。")
 	} else {
