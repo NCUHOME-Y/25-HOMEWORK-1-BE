@@ -38,9 +38,13 @@ func (c *Complex) Mul(other *Complex) *Complex {
 }
 
 func (c *Complex) Div(other *Complex) *Complex {
+	denominator := other.real*other.real + other.imag*other.imag
+	if denominator == 0 {
+		return nil
+	}
 	return &Complex{
-		real: (c.real*other.real + c.imag*other.imag) / (other.real*other.real + other.imag*other.imag),
-		imag: (c.imag*other.real - c.real*other.imag) / (other.real*other.real + other.imag*other.imag),
+		real: (c.real*other.real + c.imag*other.imag) / denominator,
+		imag: (c.imag*other.real - c.real*other.imag) / denominator,
 	}
 }
 
