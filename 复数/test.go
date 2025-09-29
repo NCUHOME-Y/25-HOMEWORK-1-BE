@@ -31,7 +31,7 @@ func (one *complex) Sub(another *complex) *complex {
 
 func (one *complex) Mul(another *complex) *complex {
 	return &complex{
-		real: one.real * another.real + one.fade * another.fade,
+		real: one.real * another.real - one.fade * another.fade,
 		fade: one.fade * another.real + one.real * another.fade,
 }
 }
