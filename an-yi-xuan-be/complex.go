@@ -32,7 +32,7 @@ func (c Complex) Mul(d Complex) Complex { //乘法
 
 func (c Complex) Div(d Complex) Complex { //除法
 	denom := d.shi*d.shi + d.xu*d.xu
-	return Complex{(c.shi*d.shi + c.xu*d.xu) / denom, (c.xu*d.shi - c.shi*d.xu) / denom}
+	return Complex{(c.shi*d.shi + c.xu*d.xu) / denom, (c.xu*d.shi - c.shi*d.xu) / denom} //denom为x^2+y^2
 }
 
 func (c Complex) String() string {
@@ -72,9 +72,11 @@ func main() {
 
 	const epsilon = 1e-9
 
-	if c2.Abs() < epsilon { //float64精度可能误判
+	const epsilon = 1e-9
+	if c2.Abs() < epsilon {
 		fmt.Println("除数 c2 太接近于零，无法执行除法。")
-		return
+	} else {
+		fmt.Printf("(%s) / (%s) = %s\n", c1, c2, c1.Div(c2))
 	}
 
 	fmt.Printf("|%s| 的模长是: %.2f\n", c1, c1.Abs())
