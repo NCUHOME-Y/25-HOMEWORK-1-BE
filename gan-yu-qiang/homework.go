@@ -20,25 +20,25 @@ func NewComplex(real, imag float64) Complex {
 }
 
 // 加法函数
-func (count1 Complex) Add(count2 Complex) Complex {
+func (c1 Complex) Add(c2 Complex) Complex {
 	return Complex{
-		Real: count1.Real + count2.Real,
-		Imag: count1.Imag + count2.Imag,
+		Real: c1.Real + c2.Real,
+		Imag: c1.Imag + c2.Imag,
 	}
 }
 
 // 减法函数
-func (count1 Complex) Subtract(count2 Complex) Complex {
+func (c1 Complex) Subtract(c2 Complex) Complex {
 	return Complex{
-		Real: count1.Real - count2.Real,
-		Imag: count1.Imag - count2.Imag,
+		Real: c1.Real - c2.Real,
+		Imag: c1.Imag - c2.Imag,
 	}
 }
 
 // 乘法函数
-func (count1 Complex) Multiply(count2 Complex) Complex {
-	realPart := count1.Real*count2.Real - count1.Imag*count2.Imag
-	imagPart := count1.Real*count2.Imag + count1.Imag*count2.Real
+func (c1 Complex) Multiply(c2 Complex) Complex {
+	realPart := c1.Real*c2.Real - c1.Imag*c2.Imag
+	imagPart := c1.Real*c2.Imag + c1.Imag*c2.Real
 	return Complex{
 		Real: realPart,
 		Imag: imagPart,
@@ -46,14 +46,14 @@ func (count1 Complex) Multiply(count2 Complex) Complex {
 }
 
 // 除法函数
-func (count1 Complex) Divide(count2 Complex) (Complex, error) {
-	mother := count2.Real*count2.Real + count2.Imag*count2.Imag
+func (c1 Complex) Divide(c2 Complex) (Complex, error) {
+	mother := c2.Real*c2.Real + c2.Imag*c2.Imag
 	if mother == 0 {
 		var errString string = "错误：分母为零"
 		return Complex{}, errors.New(errString)
 	} else {
-		realSon := count1.Real*count2.Real + count1.Imag*count2.Imag
-		imagSon := count1.Imag*count2.Real - count1.Real*count2.Imag
+		realSon := c1.Real*c2.Real + c1.Imag*c2.Imag
+		imagSon := c1.Imag*c2.Real - c1.Real*c2.Imag
 		return Complex{
 			Real: realSon / mother,
 			Imag: imagSon / mother,
@@ -62,24 +62,24 @@ func (count1 Complex) Divide(count2 Complex) (Complex, error) {
 }
 
 // Magnitude 实现求复数的模长 (绝对值)：|a+bi| = (a^2 + b^2)开根
-func (count3 Complex) Magnitude() float64 {
-	return math.Hypot(count3.Real, count3.Imag)
+func (c1 Complex) Magnitude() float64 {
+	return math.Hypot(c1.Real, c1.Imag)
 }
 
 // 打印运算后结果的函数（寻求AI帮助）
-func (count3 Complex) ToString() string {
-	if count3.Imag == 0 {
-		return fmt.Sprintf("%.2f", count3.Real)
+func (c1 Complex) ToString() string {
+	if c1.Imag == 0 {
+		return fmt.Sprintf("%.2f", c1.Real)
 	}
-	if count3.Real == 0 {
+	if c1.Real == 0 {
 		// 纯虚数
-		return fmt.Sprintf("%.2fi", count3.Imag)
+		return fmt.Sprintf("%.2fi", c1.Imag)
 	}
-	if count3.Imag < 0 {
+	if c1.Imag < 0 {
 		// 负虚部：Real - |Imag|i
-		return fmt.Sprintf("%.2f - %.2fi", count3.Real, math.Abs(count3.Imag))
+		return fmt.Sprintf("%.2f - %.2fi", c1.Real, -c1.Imag)
 	}
-	return fmt.Sprintf("%.2f + %.2fi", count3.Real, count3.Imag)
+	return fmt.Sprintf("%.2f + %.2fi", c1.Real, c1.Imag)
 }
 
 // 获取用户输入的复数
