@@ -14,6 +14,7 @@ type ComplexNumber interface {
 	Div(other ComplexNumber) ComplexNumber
 	Modulus() float64
 	String() string
+	
 }
 
 type Complex struct {
