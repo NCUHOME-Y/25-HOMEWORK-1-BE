@@ -26,7 +26,7 @@ func (c *Complex) Sub(o Complex) Complex{
 func (c *Complex) Mul(o Complex) Complex{
 		R:= c.Real * o.Real - c.Image * o.Image
 		I:= c.Real * o.Image + c.Image * o.Real 
-		return Complex{Real:R , Image:I}
+		return Complex{Real:R , Image: I}
 }
 
 func (c *Complex) Div(o Complex) (Complex, error) {
