@@ -38,7 +38,7 @@ func Div(first, second Complex) Complex {
 func ModuleLen(s Complex) float64 {
 	a := s.real * s.real
 	b := s.imaginary * s.imaginary
-	n := a*a + b*b
+	n := a + b
 	if n == 0 {
 		return 0
 	}
@@ -52,13 +52,13 @@ func ModuleLen(s Complex) float64 {
 }
 func ToString(c Complex) string {
 	if c.imaginary == 0 {
-		return fmt.Sprintf("%f", c.real)
+		return fmt.Sprintf("%.2f", c.real)
 	}
 	if c.imaginary > 0 {
-		return fmt.Sprintf("%f + %fi", c.real, c.imaginary)
+		return fmt.Sprintf("%.2f + %.2fi", c.real, c.imaginary)
 	}
 	if c.imaginary < 0 {
-		return fmt.Sprintf("%f - %fi", c.real, -c.imaginary)
+		return fmt.Sprintf("%.2f - %.2fi", c.real, -c.imaginary)
 	}
 	return "zero"
 }
@@ -74,41 +74,41 @@ func main() {
 
 	c1 := Add(first, second)
 	if c1.imaginary == 0 {
-		fmt.Printf("相加为：%f\n", c1.real)
+		fmt.Printf("相加为：%.2f\n", c1.real)
 	}
 	if c1.imaginary > 0 {
-		fmt.Printf("相加为：%f+%fi\n", c1.real, c1.imaginary)
+		fmt.Printf("相加为：%.2f+%.2fi\n", c1.real, c1.imaginary)
 	}
 	if c1.imaginary < 0 {
-		fmt.Printf("相加为：%f-%fi\n", c1.real, -c1.imaginary)
+		fmt.Printf("相加为：%.2f-%.2fi\n", c1.real, -c1.imaginary)
 	}
 
 	c2 := Mul(first, second)
 	if c2.imaginary == 0 {
-		fmt.Printf("相乘为:%f\n", c2.real)
+		fmt.Printf("相乘为:%.2f\n", c2.real)
 	}
 	if c2.imaginary > 0 {
-		fmt.Printf("相乘为:%f+%f\n", c2.real, c2.imaginary)
+		fmt.Printf("相乘为:%.2f+%.2fi\n", c2.real, c2.imaginary)
 	}
 	if c2.imaginary < 0 {
-		fmt.Printf("相乘为:%f-%f/\n", c2.real, -c2.imaginary)
+		fmt.Printf("相乘为:%.2f-%.2fi\n", c2.real, -c2.imaginary)
 	}
 
 	c3 := Div(first, second)
 	if c3.imaginary == 0 {
-		fmt.Printf("相除为:%f\n", c3.real)
+		fmt.Printf("相除为:%.2f\n", c3.real)
 	}
 	if c3.imaginary > 0 {
-		fmt.Printf("相除为:%f+%f\n", c3.real, c3.imaginary)
+		fmt.Printf("相除为:%.2f+%.2fi\n", c3.real, c3.imaginary)
 	}
 	if c3.imaginary < 0 {
-		fmt.Printf("相除为:%f-%f\n", c3.real, -c3.imaginary)
+		fmt.Printf("相除为:%.2f-%.2fi\n", c3.real, -c3.imaginary)
 	}
 
 	c4 := ModuleLen(first)
-	fmt.Printf("第一个的模长：%f\n", c4)
+	fmt.Printf("第一个的模长：%.2f\n", c4)
 	c5 := ModuleLen(second)
-	fmt.Printf("第二个的模长：%f\n", c5)
+	fmt.Printf("第二个的模长：%.2f\n", c5)
 	fmt.Println(ToString(first))
 	fmt.Println(ToString(second))
 
