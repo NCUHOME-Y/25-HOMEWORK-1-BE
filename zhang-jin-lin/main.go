@@ -73,43 +73,21 @@ func main() {
 	var second = Complex{real: real2, imaginary: imaginary2}
 
 	c1 := first.Add(second)
-	if c1.imaginary == 0 {
-		fmt.Printf("相加为：%.2f\n", c1.real)
-	}
-	if c1.imaginary > 0 {
-		fmt.Printf("相加为：%.2f+%.2fi\n", c1.real, c1.imaginary)
-	}
-	if c1.imaginary < 0 {
-		fmt.Printf("相加为：%.2f-%.2fi\n", c1.real, -c1.imaginary)
-	}
+	fmt.Printf("相加为%s\n", ToString(c1))
 
-	c2 := first.Mul(second)
-	if c2.imaginary == 0 {
-		fmt.Printf("相乘为:%.2f\n", c2.real)
-	}
-	if c2.imaginary > 0 {
-		fmt.Printf("相乘为:%.2f+%.2fi\n", c2.real, c2.imaginary)
-	}
-	if c2.imaginary < 0 {
-		fmt.Printf("相乘为:%.2f-%.2fi\n", c2.real, -c2.imaginary)
-	}
+	c2 := first.Sub(second)
+	fmt.Printf("相减%s\n", ToString(c2))
 
-	c3 := first.Div(second)
-	if c3.imaginary == 0 {
-		fmt.Printf("相除为:%.2f\n", c3.real)
-	}
-	if c3.imaginary > 0 {
-		fmt.Printf("相除为:%.2f+%.2fi\n", c3.real, c3.imaginary)
-	}
-	if c3.imaginary < 0 {
-		fmt.Printf("相除为:%.2f-%.2fi\n", c3.real, -c3.imaginary)
-	}
+	c3 := first.Mul(second)
+	fmt.Printf("相乘为%s\n", ToString(c3))
 
-	c4 := ModuleLen(first)
-	fmt.Printf("第一个的模长：%.2f\n", c4)
-	c5 := ModuleLen(second)
-	fmt.Printf("第二个的模长：%.2f\n", c5)
+	c4 := first.Div(second)
+	fmt.Printf("相除%s\n", ToString(c4))
+
+	c5 := ModuleLen(first)
+	fmt.Printf("第一个的模长：%.2f\n", c5)
+	c6 := ModuleLen(second)
+	fmt.Printf("第二个的模长：%.2f\n", c6)
 	fmt.Println(ToString(first))
 	fmt.Println(ToString(second))
-
 }
