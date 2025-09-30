@@ -39,17 +39,17 @@ func (c Complex) Mul(other Complex) Complex {
 
 // 除法
 
-func (c Complex) Div(other Complex) Complex {
+func (c Complex) Div(other Complex) (Complex, error) {
 
 	denominator := other.real*other.real + other.imag*other.imag
 	if denominator == 0 {
-		panic("除数不能为零")
+		return Complex{}, fmt.Errorf("除数不能为零")
 
 	}
 	return Complex{
 		real: (c.real*other.real + c.imag*other.imag) / (other.real*other.real + other.imag*other.imag),
 		imag: (c.imag*other.real - c.real*other.imag) / (other.real*other.real + other.imag*other.imag),
-	}
+	}, nil
 }
 
 // 模长
@@ -104,11 +104,16 @@ func main() {
 		fmt.Printf("这是乘法 c1 * c2 = %v - %vi\n", c5.real, -c5.imag)
 	}
 
-	c6 := c1.Div(c2) //除法
-	if c6.imag >= 0 {
-		fmt.Printf("这是除法 c1 / c2 = %.2f + %.2fi\n", c6.real, c6.imag)
-	} else {
-		fmt.Printf("这是除法 c1 / c2 = %.2f - %.2fi\n", c6.real, -c6.imag)
+	c6, err := c1.Div(c2) //除法
+	if err != nil {
+		fmt.Println("错误：", err)
+	}
+	if err == nil {
+		if c6.imag >= 0 {
+			fmt.Printf("这是除法 c1 / c2 = %.2f + %.2fi\n", c6.real, c6.imag)
+		} else {
+			fmt.Printf("这是除法 c1 / c2 = %.2f - %.2fi\n", c6.real, -c6.imag)
+		}
 	}
 
 	c7 := c1.Len() //模长
