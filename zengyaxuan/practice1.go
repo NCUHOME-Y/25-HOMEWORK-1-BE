@@ -11,10 +11,12 @@ type Complex struct {
 	Imag float64
 }
 
+// 构造结构体
 func NewComplex(real, imag float64) *Complex {
 	return &Complex{Real: real, Imag: imag}
 }
 
+// 加法
 func (c *Complex) Add(other *Complex) *Complex {
 	return &Complex{
 		c.Real + other.Real,
@@ -22,6 +24,7 @@ func (c *Complex) Add(other *Complex) *Complex {
 	}
 }
 
+// 减法
 func (c *Complex) Sub(other *Complex) *Complex {
 	return &Complex{
 		c.Real - other.Real,
@@ -29,6 +32,7 @@ func (c *Complex) Sub(other *Complex) *Complex {
 	}
 }
 
+// 乘法
 func (c *Complex) Mul(other *Complex) *Complex {
 	return &Complex{
 		c.Real*other.Real - c.Imag*other.Imag,
@@ -36,6 +40,7 @@ func (c *Complex) Mul(other *Complex) *Complex {
 	}
 }
 
+// 除法
 func (c *Complex) Div(other *Complex) (*Complex, error) {
 	divisor := other.Real*other.Real + other.Imag*other.Imag
 	if divisor == 0 {
@@ -47,10 +52,12 @@ func (c *Complex) Div(other *Complex) (*Complex, error) {
 	}, nil
 }
 
+// 模长
 func (c *Complex) Mod() float64 {
 	return math.Sqrt(c.Real*c.Real + c.Imag*c.Imag)
 }
 
+// 字符串化
 func (c *Complex) String() string {
 	if c.Imag > 0 {
 		return fmt.Sprintf("%.2f+%.2fi", c.Real, c.Imag)
@@ -61,6 +68,7 @@ func (c *Complex) String() string {
 	}
 }
 
+// 接收复数
 func receiveComplex(prompt string) *Complex {
 	for {
 		fmt.Println(prompt + " (格式: a+bi或a-bi ):")
@@ -91,18 +99,19 @@ func main() {
 		if _, err := fmt.Scan(&option); err != nil {
 			continue
 		}
+		//每个选项对应的操作
 		switch option {
 		case 1:
-			fmt.Println("a + b =", c1.Add(c2))
+			fmt.Println("c1 + c2 =", c1.Add(c2))
 		case 2:
-			fmt.Println("a - b =", c1.Sub(c2))
+			fmt.Println("c1 - c2 =", c1.Sub(c2))
 		case 3:
-			fmt.Println("a * b =", c1.Mul(c2))
+			fmt.Println("c1 * c2 =", c1.Mul(c2))
 		case 4:
 			if q, err := c1.Div(c2); err != nil {
 				fmt.Println("Error:", err)
 			} else {
-				fmt.Println("a / b =", q)
+				fmt.Println("c1 / c2 =", q)
 			}
 		case 5:
 			fmt.Printf("|c1| = %.2f , |c2| = %.2f\n", c1.Mod(), c2.Mod())
