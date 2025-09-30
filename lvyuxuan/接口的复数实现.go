@@ -14,6 +14,8 @@ type ComplexNumber interface {
 	Div(other ComplexNumber) ComplexNumber
 	Modulus() float64
 	String() string
+
+	
 	
 }
 
@@ -58,7 +60,8 @@ func (c *Complex) Mul(other ComplexNumber) ComplexNumber {
 func (c *Complex) Div(other ComplexNumber) ComplexNumber {
 	denominator := other.Real()*other.Real() + other.Imag()*other.Imag()
 	if denominator == 0 {
-		panic("除数不能为零")
+		fmt.Printf("division by zero")
+		return nil
 	}
 	return &Complex{
 		real: (c.real*other.Real() + c.imag*other.Imag()) / denominator,
