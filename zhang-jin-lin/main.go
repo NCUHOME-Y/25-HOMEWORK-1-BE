@@ -23,19 +23,19 @@ func (first Complex) Sub(second Complex) Complex {
 }
 func (first Complex) Mul(second Complex) Complex {
 	return Complex{
-		real:      first.real * second.real,
-		imaginary: first.imaginary * second.imaginary,
+		real:      first.real*second.real - first.imaginary*second.imaginary,
+		imaginary: first.imaginary*second.real + first.real*second.imaginary,
 	}
 }
 func (first Complex) Div(second Complex) Complex {
 	return Complex{
-		real:      first.real / second.real,
-		imaginary: first.imaginary / second.imaginary,
+		real:      (first.real*second.real + first.imaginary*second.imaginary) / (second.real*second.real + second.imaginary*second.imaginary),
+		imaginary: (first.imaginary*second.real - first.real*second.imaginary) / (second.real*second.real + second.imaginary*second.imaginary),
 	}
 }
 
 // 公式参考牛顿迭代求平方根//
-func ModuleLen(s Complex) float64 {
+func (s Complex) ModuleLen() float64 {
 	a := s.real * s.real
 	b := s.imaginary * s.imaginary
 	n := a + b
@@ -50,7 +50,7 @@ func ModuleLen(s Complex) float64 {
 	}
 	return x
 }
-func ToString(c Complex) string {
+func (c Complex) ToString() string {
 	if c.imaginary == 0 {
 		return fmt.Sprintf("%.2f", c.real)
 	}
@@ -73,21 +73,19 @@ func main() {
 	var second = Complex{real: real2, imaginary: imaginary2}
 
 	c1 := first.Add(second)
-	fmt.Printf("相加为%s\n", ToString(c1))
+	fmt.Printf("相加：%s\n", c1.ToString())
 
 	c2 := first.Sub(second)
-	fmt.Printf("相减%s\n", ToString(c2))
+	fmt.Printf("相减：%s\n", c2.ToString())
 
 	c3 := first.Mul(second)
-	fmt.Printf("相乘为%s\n", ToString(c3))
+	fmt.Printf("相乘：%s\n", c3.ToString())
 
 	c4 := first.Div(second)
-	fmt.Printf("相除%s\n", ToString(c4))
+	fmt.Printf("相除：%s\n", c4.ToString())
 
-	c5 := ModuleLen(first)
+	c5 := first.ModuleLen()
 	fmt.Printf("第一个的模长：%.2f\n", c5)
-	c6 := ModuleLen(second)
+	c6 := second.ModuleLen()
 	fmt.Printf("第二个的模长：%.2f\n", c6)
-	fmt.Println(ToString(first))
-	fmt.Println(ToString(second))
 }
