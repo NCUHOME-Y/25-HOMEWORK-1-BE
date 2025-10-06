@@ -41,7 +41,13 @@ func (a Complex) Magnitude() float64 {
 }
 
 func (a Complex) String() string {
-	return fmt.Sprintf("(%.2f + %.2fi)", a.real, a.imag)
+	if a.imag > 0 {
+		return fmt.Sprintf("(%.2f + %.2fi)", a.real, a.imag)
+	} else if a.imag < 0 {
+		return fmt.Sprintf("(%.2f - %.2fi)", a.real, -a.imag)
+	} else {
+		return fmt.Sprintf("(%.2fi)", a.imag)
+	}
 }
 
 func main() {
